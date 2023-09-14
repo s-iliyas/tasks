@@ -1,0 +1,55 @@
+version : "3.8"
+
+services:
+  dev_redis_cache:
+    container_name: dev_redis_cache
+    image: redis:alpine3.18
+    ports:
+      - ${DEV_REDIS_PORT}:${DEV_REDIS_PORT}
+    restart: on-failure
+    command: redis-server --requirepass ${DEV_REDIS_PASSWORD}
+    networks:
+      - app_net
+
+  dev_db:
+    container_name: dev_db
+    image: postgres:12.16
+    ports:
+      - ${DEV_POSTGRES_PORT}:${DEV_POSTGRES_PORT}
+    restart: on-failure
+    volumes:
+      - ../dev_data/db:/var/lib/postgresql/data:z
+    environment:
+      - POSTGRES_DB=${DEV_POSTGRES_DB}
+      - POSTGRES_USER=${DEV_POSTGRES_USER}
+      - POSTGRES_PASSWORD=${DEV_POSTGRES_PASSWORD}
+    networks:
+      - app_net
+
+  dev_app:
+    container_name: dev_app
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8000:8000"
+    networks:
+      - app_net
+    depends_on:
+      - dev_db
+      - dev_redis_cache
+
+  nginx:
+    container_name: dev_nginx
+    image: nginx:1.25
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.dev.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - app_net
+    depends_on:
+      - dev_app
+
+networks:
+  app_net:

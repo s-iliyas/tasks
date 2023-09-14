@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  background-color: rgb(38 38 38);
+  color: rgb(204, 204, 204);
+}
+
+::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Color of the scrollbar track */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #888; /* Color of the scrollbar thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Color of the scrollbar thumb on hover */
+}
+
+.ant-input,
+.ant-select-selector,
+.ant-select-dropdown {
+  background-color: rgb(82, 82, 82) !important;
+  caret-color: #f1f1f1;
+  color: white !important;
+}
+
+.ant-input::placeholder{
+  color: #a0a0a0 !important;
+}
+
+.ant-select-item-option-content,
+.ant-select-selection-item {
+  color: rgb(255, 255, 255);
+}
+
+.ant-select-dropdown
+  .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+  color: rgb(255, 255, 255) !important;
+  font-weight: 600;
+  background-color: rgb(53, 53, 53);
+}
+
+.ant-select {
+  background-color: transparent !important;
+}
+
+.ant-pagination-item-active,
+.ant-pagination-item:hover {
+  border: none !important;
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(254 215 170 / var(--tw-bg-opacity)) !important;
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  align-items: center !important;
+  border-radius: 9999px !important;
+  color: black !important;
+}
+
+.ant-pagination {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.ant-pagination-item a {
+  color: white !important;
+}
+
+.ant-pagination-item-active a {
+  color: black !important;
+}
+
+.ant-pagination-item:hover a {
+  color: black !important;
+}
+
+.ant-pagination-prev,
+.ant-pagination-next,
+.ant-pagination-jump-next,
+.ant-pagination-jump-prev {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.ant-select-selector {
+  cursor: pointer !important;
+}
