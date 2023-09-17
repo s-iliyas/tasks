@@ -40,7 +40,7 @@ Follow these steps to set up and run the Event Scheduler project on your local m
 
    This will start the backend server and serve the JSON data.
 
-4. **Create .env in root interfcae directory:**
+4. **Create .env in root interface directory:**
 
    .env should contain
    ```
