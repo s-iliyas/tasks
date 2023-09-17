@@ -40,7 +40,14 @@ Follow these steps to set up and run the Event Scheduler project on your local m
 
    This will start the backend server and serve the JSON data.
 
-4. **Start the React App (Frontend):**
+4. **Create .env in root interfcae directory:**
+
+   .env should contain
+   ```
+   VITE_BACKEND_BASE_URL=http://localhost:8000
+   ```
+
+5. **Start the React App (Frontend):**
 
    In another terminal window, navigate to the project folder and run the following command to start the React development server:
 
