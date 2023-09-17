@@ -13,10 +13,10 @@ const searchEvents = async ({ name_like, date }) => {
   url = `${import.meta.env.VITE_BACKEND_BASE_URL}/events?${params.toString()}`;
   try {
     const response = await axios.get(url);
-    return response.status === 200 ? response.data : {};
+    return response.status === 200 ? response.data : [];
   } catch (error) {
     console.log(error.message);
-    return {};
+    return [];
   }
 };
 

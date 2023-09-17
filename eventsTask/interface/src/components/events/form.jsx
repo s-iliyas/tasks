@@ -169,7 +169,7 @@ const Form = () => {
               }}
             />
           </div>
-          <div className="flex-col flex grow space-y-1">
+          <div className="flex-col flex grow space-y-1 min-w-[10rem]">
             <small>Time</small>
             <Select
               value={formData.time}

@@ -29,7 +29,7 @@ const EventView = ({ events }) => {
   return (
     <div className="flex flex-col items-center space-y-2 w-[100%] sm:w-[40rem] lg:w-[50rem]">
       {!view ? <Calendar fullscreen={false} onChange={onPanelChange} /> : ""}
-      {events?.length === 0 ? (
+      {!events || events?.length === 0 ? (
         <>
           <img src="/browser.png" className="h-56 w-56" />
           <strong>No events</strong>
