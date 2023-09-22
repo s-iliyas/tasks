@@ -1,0 +1,45 @@
+type User {
+  id: ID!
+  username: String!
+  email: String!
+  events: [Event!]!
+}
+
+type Event {
+  id: ID!
+  title: String!
+  description: String
+  completed: Boolean!
+  userId: ID!
+}
+
+type Query {
+  user(id: ID!): User
+  event(id: ID!): Event
+  events: [Event]
+}
+
+type LoginResponse {
+  token: String
+}
+
+type CreateEventResponse {
+  event: Event
+}
+
+type Mutation {
+  login(password: String!, email: String!): LoginResponse
+  updateUser(id: ID!, username: String, email: String): User
+  deleteUser(id: ID!): ID
+  createEvent(
+    title: String!
+    description: String
+  ): CreateEventResponse
+  updateEvent(
+    id: ID!
+    title: String
+    description: String
+    completed: Boolean
+  ): Event
+  deleteEvent(id: ID!): ID
+}
