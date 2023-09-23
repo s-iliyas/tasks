@@ -31,8 +31,7 @@ export const login = async (_: any, data: Login) => {
     let user = await User.find({ email: data?.email });
     let response: { token: string };
     if (user.length < 1) {
-      const salt = await bcrypt.genSalt(10);
-      const hashedPassword = await bcrypt.hash(data?.password, salt);
+      const hashedPassword = await bcrypt.hash(data?.password, 10);
       const newUser = await User.create({
         email: data?.email,
         password: hashedPassword,
