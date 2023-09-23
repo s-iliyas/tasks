@@ -64,7 +64,7 @@ dbConnector()
   })
   .then(() => {
     app
-      .listen(config.port, () => {
+      .listen(config.port || 8000, () => {
         console.log(`Server is running on port ${config.port}`);
         console.log(`Environment: ${config.environment || "development"}`);
         console.log(`Server started at: ${new Date()}`);
