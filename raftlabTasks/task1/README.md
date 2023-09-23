@@ -87,15 +87,15 @@ The GraphQL schema is defined in the provided `schema.graphql` file. It includes
 
 ### User Queries and Mutations
 
-- `user(): User`: Get user details by ID.
-- `updateUser(email: String): User`: Update user information.
-- `deleteUser(): ID`: Delete a user.
+- `user: User`: Get user details by token.
+- `updateUser(email: String): User`: Update user email.
+- `deleteUser: ID`: Delete user by token.
 
 ### Event Queries and Mutations
 
 - `event(id: ID!): Event`: Get event details by ID.
-- `events: [Event]`: Get a list of all events.
-- `createEvent(title: String!, description: String): Event`: Create a new event.
+- `events: [Event]`: Get a list of all events for user token.
+- `createEvent(title: String!, description: String): Event`: Create a new event for user token.
 - `updateEvent(id: ID!, title: String, description: String, completed: Boolean): Event`: Update event information.
 - `deleteEvent(id: ID!): ID`: Delete an event.
 
@@ -138,7 +138,7 @@ mutation {
 
 ```graphql
 mutation {
-  deleteUser()
+  deleteUser
 }
 ```
 
