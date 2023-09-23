@@ -14,8 +14,8 @@ This README.md file provides an overview of a GraphQL API implemented using Node
 - [Queries and Mutations](#queries-and-mutations)
 - [Usage](#usage)
 - [Sample Queries and Mutations](#sample-queries-and-mutations)
-- [Contributing](#contributing)
-- [License](#license)
+- [Cache Backends](#cache-backend)
+
 
 ## Getting Started
 
@@ -211,3 +211,8 @@ query {
   }
 }
 ```
+
+## Cache Backend
+
+- For more detailed information please visit [Cache Backend](https://www.apollographql.com/docs/apollo-server/performance/cache-backends)
+- Here in this project I have used In memory cache which apollo server can be configured in default but We can use redis or memecached using keyV wrapper around server.

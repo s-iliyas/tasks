@@ -11,6 +11,7 @@ import gql from "graphql-tag";
 import { ApolloServer } from "@apollo/server";
 import { buildSubgraphSchema } from "@apollo/subgraph";
 import { expressMiddleware } from "@apollo/server/express4";
+import { InMemoryLRUCache } from "@apollo/utils.keyvaluecache";
 import { ApolloServerPluginInlineTraceDisabled } from "@apollo/server/plugin/disabled";
 
 import config from "./config";
@@ -41,6 +42,10 @@ const extraConfig = async (app: Express) =>
           resolvers,
         }),
         plugins: [ApolloServerPluginInlineTraceDisabled()],
+        cache: new InMemoryLRUCache({
+          maxSize: Math.pow(2, 20) * 100,
+          ttl: 300,
+        }),
       });
       await server.start();
 
