@@ -14,7 +14,7 @@ type Event {
 }
 
 type Query {
-  user(id: ID!): User
+  user: User
   event(id: ID!): Event
   events: [Event]
 }
@@ -23,18 +23,11 @@ type LoginResponse {
   token: String
 }
 
-type CreateEventResponse {
-  event: Event
-}
-
 type Mutation {
   login(password: String!, email: String!): LoginResponse
-  updateUser(id: ID!, username: String, email: String): User
-  deleteUser(id: ID!): ID
-  createEvent(
-    title: String!
-    description: String
-  ): CreateEventResponse
+  updateUser(email: String): User
+  deleteUser: ID
+  createEvent(title: String!, description: String): Event
   updateEvent(
     id: ID!
     title: String

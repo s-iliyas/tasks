@@ -13,7 +13,7 @@ import { buildSubgraphSchema } from "@apollo/subgraph";
 import { expressMiddleware } from "@apollo/server/express4";
 import { ApolloServerPluginInlineTraceDisabled } from "@apollo/server/plugin/disabled";
 
-import config from "../config";
+import config from "./config";
 import resolvers from "./graphql/resolvers";
 import dbConnector from "./utils/dbConnector";
 import tokenMiddleware from "./middlewares/token.middleware";
@@ -62,18 +62,19 @@ dbConnector()
   .then(() => {
     extraConfig(app);
   })
+  .then(() => {
+    app
+      .listen(config.port, () => {
+        console.log(`Server is running on port ${config.port}`);
+        console.log(`Environment: ${config.environment || "development"}`);
+        console.log(`Server started at: ${new Date()}`);
+        console.log("Press Ctrl+C to stop the server.");
+      })
+      .on("error", (error) => {
+        console.log("[SERVER-ERROR] - ", error.message);
+        process.exit();
+      });
+  })
   .catch((error) => {
     console.log("[DATABASE-ERROR] - ", error.message);
-  });
-
-app
-  .listen(config.port, () => {
-    console.log(`Server is running on port ${config.port}`);
-    console.log(`Environment: ${config.environment || "development"}`);
-    console.log(`Server started at: ${new Date()}`);
-    console.log("Press Ctrl+C to stop the server.");
-  })
-  .on("error", (error) => {
-    console.log("[SERVER-ERROR] - ", error.message);
-    process.exit();
   });

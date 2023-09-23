@@ -14,7 +14,7 @@ interface UpdateEvent {
   title?: string;
   description?: string;
   completed?: string;
-  eventId: number;
+  id: string;
 }
 
 export const createEvent = async (
@@ -31,7 +31,7 @@ export const createEvent = async (
       completed: false,
     };
     const event = await Event.create(eventData);
-    return { event };
+    return event;
   } catch (error) {
     console.log("[CREATE_EVENT_ERROR]", error.message);
     throw new GraphQLError(error.message, {
@@ -50,8 +50,9 @@ export const updateEvent = async (
 ) => {
   const decoded: string | jwt.JwtPayload = await verifyToken(context?.token);
   try {
-    const event = await Event.updateOne({});
-    return { event };
+    await Event.updateOne({ _id: data?.id }, data);
+    const event = await Event.find({ _id: data?.id });
+    return event[0];
   } catch (error) {
     console.log("[CREATE_EVENT_ERROR]", error.message);
     throw new GraphQLError(error.message, {
@@ -62,4 +63,32 @@ export const updateEvent = async (
     });
   }
 };
-export const deleteEvent = () => {};
+
+export const deleteEvent = async (
+  _: any,
+  data: { id: string },
+  context: { token: string }
+) => {
+  const decoded: string | jwt.JwtPayload = await verifyToken(context?.token);
+  try {
+    const result = await Event.deleteOne({ _id: data?.id });
+    if (result.deletedCount === 1) {
+      return data?.id;
+    } else {
+      throw new GraphQLError("No such event.", {
+        extensions: {
+          code: "BAD_REQUEST",
+          http: { status: 400 },
+        },
+      });
+    }
+  } catch (error) {
+    console.log("[CREATE_EVENT_ERROR]", error.message);
+    throw new GraphQLError(error.message, {
+      extensions: {
+        code: "BAD_REQUEST",
+        http: { status: 400 },
+      },
+    });
+  }
+};

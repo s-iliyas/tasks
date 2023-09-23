@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import { GraphQLError } from "graphql";
 
-import config from "../../config";
+import config from "../config";
 
 const verifyToken = (token: string) =>
   new Promise((resolve, _) => {
