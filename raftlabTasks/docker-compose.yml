@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:6.0
+    ports:
+      - '27017:27017'
+    volumes:
+      - ../data_db:/data/db
+
+  redis:
+    container_name: redis
+    image: redis:alpine3.18
+    ports:
+      - '6379:6379'
+    restart: on-failure
+    command: redis-server --requirepass anyPassword
+
+volumes:
+  data_db:

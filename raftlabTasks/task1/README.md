@@ -55,7 +55,7 @@ Before you start, ensure you have the following installed:
    SECRET_KEY=your-secret-key
 
    # MongoDB connection URI
-   MONGO_DB_URL=mongodb://localhost:27017/your-database-name
+   MONGO_DB_URL=mongodb://localhost:27017/raftlabs
    ```
 
 4. Start the application:

@@ -57,7 +57,7 @@ VITE_BACKEND_BASE_URL=http://localhost:8080
 
 SERVER_PORT=8080
 
-MONGO_DB_URL="mongodb+srv://username:password@cluster.hdaek8r.mongodb.net/collection?retryWrites=true&w=majority"
+MONGO_DB_URL=mongodb://localhost:27017/raftlabs
 
 FRONTEND_URL="http://localhost:3000"
 
