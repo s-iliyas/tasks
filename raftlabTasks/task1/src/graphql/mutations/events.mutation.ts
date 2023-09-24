@@ -4,6 +4,7 @@ import { GraphQLError } from "graphql";
 
 import verifyToken from "../../helpers/verifyToken";
 import Event from "../../models/event";
+import User from "../../models/user";
 
 interface CreateEvent {
   title: string;
@@ -24,8 +25,13 @@ export const createEvent = async (
 ) => {
   const decoded: string | jwt.JwtPayload = await verifyToken(context?.token);
   try {
+    let userId = decoded?.userId;
+    if (!userId) {
+      const user = await User.find({ email: decoded?.email });
+      userId = user[0]._id;
+    }
     const eventData = {
-      userId: decoded?.userId,
+      userId,
       title: data?.title,
       description: data?.description,
       completed: false,
@@ -48,7 +54,6 @@ export const updateEvent = async (
   data: UpdateEvent,
   context: { token: string }
 ) => {
-  const decoded: string | jwt.JwtPayload = await verifyToken(context?.token);
   try {
     await Event.updateOne({ _id: data?.id }, data);
     const event = await Event.find({ _id: data?.id });
@@ -69,7 +74,6 @@ export const deleteEvent = async (
   data: { id: string },
   context: { token: string }
 ) => {
-  const decoded: string | jwt.JwtPayload = await verifyToken(context?.token);
   try {
     const result = await Event.deleteOne({ _id: data?.id });
     if (result.deletedCount === 1) {

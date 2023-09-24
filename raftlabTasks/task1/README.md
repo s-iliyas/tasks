@@ -198,7 +198,7 @@ query(id: "event-id") {
 }
 ```
 
-### Get Event (with JWT token in header)
+### Get Events (with JWT token in header)
 
 ```graphql
 query {

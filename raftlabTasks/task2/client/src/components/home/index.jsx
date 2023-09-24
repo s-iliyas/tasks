@@ -2,13 +2,15 @@ import { Link, useNavigate } from "react-router-dom";
 
 const Home = () => {
   const token = localStorage.getItem("chatToken");
+  const userEmail = localStorage.getItem("userEmail");
 
   const navigate = useNavigate();
-  
+
   return (
     <section className="min-h-screen flex flex-col justify-center items-center">
       {token ? (
         <div className="flex flex-col space-y-5">
+          <strong>Holaa, {userEmail}</strong>
           <div className="flex flex-wrap items-center gap-3">
             <Link
               onClick={() => {
@@ -18,6 +20,12 @@ const Home = () => {
               className="border-orange-200 hover:text-orange-300 border text-md hover:border-orange-300 rounded-md text-center py-2 px-5"
             >
               Logout
+            </Link>
+            <Link
+              to={"/events"}
+              className="border-orange-200 hover:text-orange-300 border text-md hover:border-orange-300 rounded-md text-center py-2 px-5"
+            >
+              Events
             </Link>
             <Link
               to={"/rooms"}

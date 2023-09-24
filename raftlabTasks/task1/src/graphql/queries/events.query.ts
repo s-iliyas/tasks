@@ -3,11 +3,17 @@ import { GraphQLError } from "graphql";
 
 import Event from "../../models/event";
 import verifyToken from "../../helpers/verifyToken";
+import User from "../../models/user";
 
 export const events = async (_: any, __: any, context: { token: string }) => {
   const decoded: string | jwt.JwtPayload = await verifyToken(context?.token);
   try {
-    const events = await Event.find({ userId: decoded?.userId });
+    let query = { userId: decoded?.userId };
+    if (!decoded?.userId) {
+      const user = await User.find({ email: decoded?.email });
+      query = { userId: user[0]?._id };
+    }
+    const events = await Event.find(query);
     return events;
   } catch (error) {
     console.log("[EVENTS_QUERY_ERROR]", error.message);
