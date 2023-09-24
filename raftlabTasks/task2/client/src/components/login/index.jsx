@@ -19,7 +19,7 @@ const Login = () => {
       })
       .then((response) => {
         localStorage.setItem("chatToken", response?.data?.token);
-        localStorage.setItem("userEmail", response?.data?.userEmail);
+        localStorage.setItem("userEmail", response?.data?.email);
         navigate("/");
       })
       .catch((err) => {

@@ -54,7 +54,7 @@ export class UserController {
       const token = jwt.sign({ email: user[0].email }, this.SECRET_KEY, {
         expiresIn: '1d',
       });
-      return { message: 'Login success.', token, userEmail: user[0].email };
+      return { message: 'Login success.', token, email: user[0].email };
     } catch (error) {
       console.log('[REGISTER_USER_ERROR]', error.message);
       throw new HttpException({ error: error.message }, HttpStatus.BAD_REQUEST);
