@@ -1,6 +1,4 @@
-Certainly! Here's a README file for your Docker Compose configuration:
-
----
+### For Real time chat application of task 2 , play with react ui which is integrated with sockets and other APIs from both servers for client chat or room chat and event handling. So first set up database, then create .env files in both servers and client, then run single parent script 'npm install && npm run start' in raftlabTasks folder. Go through all README.md files of all folders and apiDocuments. For other APIs besides sockets go through postman collection json or import them into your postman and play with them.
 
 # Docker Compose Configuration for MongoDB
 
@@ -163,7 +161,7 @@ Before you begin, make sure you have the following prerequisites installed:
 - npm (Node Package Manager)
 - Task 1 GraphQL Server setup and running as per its README.md
 
-## Task 1 and Task 2 SECRET_KEY Environment Variable
+## Task 1 and Task 2 Environment Variable
 
 In order for Task 2 to work with the GraphQL server from Task 1, you must ensure that both projects share the same SECRET_KEY environment variable. This key is used for authentication and authorization.
 

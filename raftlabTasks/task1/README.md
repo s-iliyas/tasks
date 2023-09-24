@@ -115,7 +115,7 @@ Here are some sample queries and mutations you can use:
 
 ### Login and Get JWT Token
 
-```graphql
+```
 mutation {
   login(email: "john@example.com", password: "password") {
     token
@@ -125,7 +125,7 @@ mutation {
 
 ### Update User (with JWT token in header)
 
-```graphql
+```
 mutation {
   updateUser(email: "john@example.com") {
     id
@@ -136,7 +136,7 @@ mutation {
 
 ### Delete User (with JWT token in header)
 
-```graphql
+```
 mutation {
   deleteUser
 }
@@ -144,7 +144,7 @@ mutation {
 
 ### Get User Profile (with JWT token in header)
 
-```graphql
+```
 query {
   user {
     id
@@ -155,7 +155,7 @@ query {
 
 ### Create Event (with JWT token)
 
-```graphql
+```
 mutation {
   createEvent(title: "Sample Event", description: "This is a sample event") {
     id
@@ -169,7 +169,7 @@ mutation {
 
 ### Update Event (with JWT token in header)
 
-```graphql
+```
 mutation {
   updateEvent(id: "event-id", title: "Updated Event Title") {
     id
@@ -180,7 +180,7 @@ mutation {
 
 ### Delete Event (with JWT token in header)
 
-```graphql
+```
 mutation {
   deleteEvent(id: "event-id")
 }
@@ -188,21 +188,23 @@ mutation {
 
 ### Get Event (with JWT token in header)
 
-```graphql
-query(id: "event-id") {
-    id
-    title
-    description
-    completed
-    userId
+```
+query {
+    event(id: "651068f453ef45072c808d7b") {
+        id
+        title
+        description
+        completed
+        userId
+    }
 }
 ```
 
 ### Get Events (with JWT token in header)
 
-```graphql
+```
 query {
-  event {
+  events {
     id
     title
     description

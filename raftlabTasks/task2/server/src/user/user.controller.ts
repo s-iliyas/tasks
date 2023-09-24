@@ -47,7 +47,10 @@ export class UserController {
       if (user.length === 0) {
         throw new Error('User does not exists. Please Register.');
       }
-      const comparePassword = bcrypt.compare(data.password, user[0].password);
+      const comparePassword = await bcrypt.compare(
+        data.password,
+        user[0].password,
+      );
       if (!comparePassword) {
         throw new Error('Incorrect Password.');
       }
