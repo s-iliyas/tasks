@@ -147,7 +147,7 @@ const Clients = () => {
                     message.senderId === userEmail
                       ? "ml-auto flex-row-reverse"
                       : "mr-auto flex-row"
-                  } flex m-1 items-start justify-start`}
+                  } flex gap-x-1 items-start justify-start`}
                 >
                   <img src="/user.png" alt="" className="h-6" />
                   <div
