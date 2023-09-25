@@ -5,11 +5,11 @@ import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
-import { MessageGateway } from './message/message.gateway';
 import { RoomModule } from './room/room.module';
 import verifyToken from './middlewares/token.middleware';
 import { RoomController } from './room/room.controller';
 import { EventsController } from './events/events.controller';
+import { MessageModule } from './message/message.module';
 
 @Module({
   imports: [
@@ -17,9 +17,10 @@ import { EventsController } from './events/events.controller';
     MongooseModule.forRoot(process.env.MONGO_DB_URL),
     UserModule,
     RoomModule,
+    MessageModule,
   ],
   controllers: [AppController, EventsController],
-  providers: [AppService, MessageGateway],
+  providers: [AppService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

@@ -1,7 +1,7 @@
 import { Input } from "antd";
 import axios from "axios";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -9,18 +9,24 @@ const Login = () => {
     password: "",
   });
 
-  const navigate = useNavigate();
   const [errMsg, setErrMsg] = useState("");
 
   const handleLogin = async () => {
     axios
-      .post(`${import.meta.env.VITE_BACKEND_BASE_URL}/user/login`, formData, {
-        headers: { "Content-Type": "application/json" },
-      })
+      .post(
+        `${import.meta.env.VITE_BACKEND_BASE_URL}/user/login`,
+        {
+          email: formData.email?.trim(),
+          password: formData.password?.trim(),
+        },
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      )
       .then((response) => {
         localStorage.setItem("chatToken", response?.data?.token);
         localStorage.setItem("userEmail", response?.data?.email);
-        navigate("/");
+        window.location.href = "/";
       })
       .catch((err) => {
         setErrMsg(

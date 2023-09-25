@@ -6,12 +6,7 @@ import {
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 import * as jwt from 'jsonwebtoken';
-
-interface Message {
-  recipientId: string;
-  message: string;
-  senderId: string;
-}
+import { ClientMessageDto } from './message.dto';
 
 @WebSocketGateway({
   cors: {
@@ -28,7 +23,6 @@ export class MessageGateway {
 
   async handleConnection(client: Socket) {
     const token: string = await client.handshake.auth.token;
-
     if (token) {
       try {
         const decodedToken = jwt.verify(token, this.SECRET_KEY) as {
@@ -52,10 +46,20 @@ export class MessageGateway {
     }
   }
 
+  @SubscribeMessage('joinClient')
+  handlePrivateClientMessage(
+    @MessageBody()
+    data: {
+      userEmail: string;
+    },
+  ) {
+    return { message: `${data.userEmail} Joined` };
+  }
+
   @SubscribeMessage('clients')
   handlePrivateMessage(
     @MessageBody()
-    data: Message,
+    data: ClientMessageDto,
   ) {
     const { recipientId } = data;
     const recipientSocket = this.connectedUsers[recipientId];

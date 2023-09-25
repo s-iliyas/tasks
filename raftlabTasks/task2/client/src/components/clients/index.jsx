@@ -2,7 +2,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { Input } from "antd";
-import socket from "../../socker";
+import socket from "../../socket";
 
 const Clients = () => {
   const userEmail = localStorage.getItem("userEmail");
@@ -42,6 +42,10 @@ const Clients = () => {
       setOnline(data?.online);
     }
 
+    socket.emit("joinClient", { userEmail }, (data) => {
+      console.log(data?.message);
+    });
+
     socket.on("clients", onListenClientMessage);
 
     return () => {
@@ -67,12 +71,8 @@ const Clients = () => {
     );
   };
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
-  }
-
   useEffect(() => {
-    scrollToBottom()
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
   return (
@@ -131,7 +131,7 @@ const Clients = () => {
           <small className="text-center">
             {currentClient} {"Client's"} Chat
           </small>
-          <div className="overflow-y-auto h-[88%]" >
+          <div className="overflow-y-auto h-[88%]">
             {messages
               ?.filter(
                 (message) =>
@@ -147,7 +147,7 @@ const Clients = () => {
                     message.senderId === userEmail
                       ? "ml-auto flex-row-reverse"
                       : "mr-auto flex-row"
-                  } flex gap-x-1 items-start justify-start`}
+                  } flex p-1 gap-x-1 items-start justify-start`}
                 >
                   <img src="/user.png" alt="" className="h-6" />
                   <div

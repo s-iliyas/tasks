@@ -1,4 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
+import socket from "../../socket";
 
 const Home = () => {
   const token = localStorage.getItem("chatToken");
@@ -9,12 +10,13 @@ const Home = () => {
   return (
     <section className="min-h-screen flex flex-col justify-center items-center">
       {token ? (
-        <div className="flex flex-col space-y-5">
+        <div className="flex flex-col space-y-5 items-center justify-center">
           <strong>Holaa, {userEmail}</strong>
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3 justify-center">
             <Link
               onClick={() => {
                 localStorage.clear();
+                socket.close();
                 navigate("/");
               }}
               className="border-orange-200 hover:text-orange-300 border text-md hover:border-orange-300 rounded-md text-center py-2 px-5"

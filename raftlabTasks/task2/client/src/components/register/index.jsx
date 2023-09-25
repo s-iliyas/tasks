@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Input } from "antd";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -10,20 +10,23 @@ const Register = () => {
     password2: "",
   });
 
-  const navigate = useNavigate();
   const [errMsg, setErrMsg] = useState("");
 
   const handleRegister = async () => {
     axios
       .post(
         `${import.meta.env.VITE_BACKEND_BASE_URL}/user/register`,
-        formData,
+        {
+          email: formData.email?.trim(),
+          password: formData.password?.trim(),
+          password2: formData.password2?.trim(),
+        },
         { headers: { "Content-Type": "application/json" } }
       )
       .then((response) => {
         localStorage.setItem("chatToken", response?.data?.token);
         localStorage.setItem("userEmail", response?.data?.email);
-        navigate("/");
+        window.location.href = "/";
       })
       .catch((err) => {
         setErrMsg(

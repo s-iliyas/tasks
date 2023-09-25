@@ -2,7 +2,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { Input } from "antd";
-import socket from "../../socker";
+import socket from "../../socket";
 
 const Rooms = () => {
   const userEmail = localStorage.getItem("userEmail");
