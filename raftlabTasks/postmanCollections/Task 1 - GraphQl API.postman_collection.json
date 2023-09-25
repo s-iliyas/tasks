@@ -1,0 +1,293 @@
+{
+	"info": {
+		"_postman_id": "0f5bb370-fb9f-4d35-bf3c-f859211fb6e8",
+		"name": "Task 1 - GraphQl API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29991765",
+		"_collection_link": "https://www.postman.com/material-specialist-41571261/workspace/raftlabtasks-iliyas/collection/29991765-0f5bb370-fb9f-4d35-bf3c-f859211fb6e8?action=share&source=collection_link&creator=29991765"
+	},
+	"item": [
+		{
+			"name": "Login and Get JWT Token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation {\n  login(email: \"john@example.com\", password: \"password\") {\n    token\n  }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTEwNjcwNDUzZWY0NTA3MmM4MDhkNzEiLCJpYXQiOjE2OTU1NzM3NjQsImV4cCI6MTY5NTY2MDE2NH0.TN2SeG9sKUe3JiyM9CAWJncWEeTx2Df62M_oeIBC9es",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation {\n  updateUser(email: \"john@gmail.com\") {\n    id\n    email\n  }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTEwNjcwNDUzZWY0NTA3MmM4MDhkNzEiLCJpYXQiOjE2OTU1NzM3NjQsImV4cCI6MTY5NTY2MDE2NH0.TN2SeG9sKUe3JiyM9CAWJncWEeTx2Df62M_oeIBC9es",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation {\n  deleteUser\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User Profile",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTEwNjcwNDUzZWY0NTA3MmM4MDhkNzEiLCJpYXQiOjE2OTU1NzM3NjQsImV4cCI6MTY5NTY2MDE2NH0.TN2SeG9sKUe3JiyM9CAWJncWEeTx2Df62M_oeIBC9es",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query {\n  user {\n    id\n    email\n  }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Event",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTEwNjcwNDUzZWY0NTA3MmM4MDhkNzEiLCJpYXQiOjE2OTU1NzM3NjQsImV4cCI6MTY5NTY2MDE2NH0.TN2SeG9sKUe3JiyM9CAWJncWEeTx2Df62M_oeIBC9es",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation {\n  createEvent(title: \"Sample Event 1\", description: \"This is a sample event 2\") {\n    id\n    title\n    description\n    completed\n    userId\n  }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Event",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTEwNjcwNDUzZWY0NTA3MmM4MDhkNzEiLCJpYXQiOjE2OTU1NzM3NjQsImV4cCI6MTY5NTY2MDE2NH0.TN2SeG9sKUe3JiyM9CAWJncWEeTx2Df62M_oeIBC9es",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation {\n  updateEvent(id: \"651067f753ef45072c808d76\", title: \"Updated Event Title\") {\n    id\n    title\n  }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Event",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTEwNjcwNDUzZWY0NTA3MmM4MDhkNzEiLCJpYXQiOjE2OTU1NzM3NjQsImV4cCI6MTY5NTY2MDE2NH0.TN2SeG9sKUe3JiyM9CAWJncWEeTx2Df62M_oeIBC9es",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation {\n  deleteEvent(id: \"651067f753ef45072c808d76\")\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Event",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTEwNjcwNDUzZWY0NTA3MmM4MDhkNzEiLCJpYXQiOjE2OTU1NzM3NjQsImV4cCI6MTY5NTY2MDE2NH0.TN2SeG9sKUe3JiyM9CAWJncWEeTx2Df62M_oeIBC9es",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query {\n    event(id: \"651068f453ef45072c808d7b\") {\n        id\n        title\n        description\n        completed\n        userId\n    }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Events",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTEwNjcwNDUzZWY0NTA3MmM4MDhkNzEiLCJpYXQiOjE2OTU1NzM3NjQsImV4cCI6MTY5NTY2MDE2NH0.TN2SeG9sKUe3JiyM9CAWJncWEeTx2Df62M_oeIBC9es",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query {\n  events {\n    id\n    title\n    description\n    completed\n    userId\n  }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,289 @@
+{
+	"info": {
+		"_postman_id": "a104ab1b-83bf-4ffc-9a75-f3ab93f7cd24",
+		"name": "Task 2 - NestJS Server API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29991765",
+		"_collection_link": "https://www.postman.com/material-specialist-41571261/workspace/raftlabtasks-iliyas/collection/29991765-a104ab1b-83bf-4ffc-9a75-f3ab93f7cd24?action=share&source=collection_link&creator=29991765"
+	},
+	"item": [
+		{
+			"name": "Integrated GraphQL API Server to this Server",
+			"item": [
+				{
+					"name": "Get Events",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJAYS5jb20iLCJpYXQiOjE2OTU1NzU1NjksImV4cCI6MTY5NTY2MTk2OX0.jkfDT_GWQV39MacaBh4QcH6ZkJwtSQHRcHj1K44Vn9U",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/events",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Event",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJAYS5jb20iLCJpYXQiOjE2OTU1NzU1NjksImV4cCI6MTY5NTY2MTk2OX0.jkfDT_GWQV39MacaBh4QcH6ZkJwtSQHRcHj1K44Vn9U",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\" : \"One piece\",\n    \"description\" : \"Completed watching, let's try again.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/events/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"events",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Event",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJAYS5jb20iLCJpYXQiOjE2OTU1NzU1NjksImV4cCI6MTY5NTY2MTk2OX0.jkfDT_GWQV39MacaBh4QcH6ZkJwtSQHRcHj1K44Vn9U",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"eventId\": \"65106e87a78d2fbe5fda8cae\",\n    \"title\": \"Zorooooooooo\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/events/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"events",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Event",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJAYS5jb20iLCJpYXQiOjE2OTU1NzU1NjksImV4cCI6MTY5NTY2MTk2OX0.jkfDT_GWQV39MacaBh4QcH6ZkJwtSQHRcHj1K44Vn9U",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/events?eventId=65106e87a78d2fbe5fda8cae",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"events"
+							],
+							"query": [
+								{
+									"key": "eventId",
+									"value": "65106e87a78d2fbe5fda8cae"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Clients",
+			"item": [
+				{
+					"name": "Get Clients",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Rooms",
+			"item": [
+				{
+					"name": "Create Room",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJAYS5jb20iLCJpYXQiOjE2OTU1NzU1NjksImV4cCI6MTY5NTY2MTk2OX0.jkfDT_GWQV39MacaBh4QcH6ZkJwtSQHRcHj1K44Vn9U",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Solo\",\n    \"description\": \"Anime group chat\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/rooms/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rooms",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Rooms",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJAYS5jb20iLCJpYXQiOjE2OTU1NzU1NjksImV4cCI6MTY5NTY2MTk2OX0.jkfDT_GWQV39MacaBh4QcH6ZkJwtSQHRcHj1K44Vn9U",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/rooms",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rooms"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"b@a.com\",\n    \"password\": \"Iliyas@123\",\n    \"password2\": \"Iliyas@123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/user/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"b@a.com\",\n    \"password\": \"Iliyas@123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/user/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
