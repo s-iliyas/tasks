@@ -25,7 +25,7 @@ const Register = () => {
       )
       .then((response) => {
         localStorage.setItem("chatToken", response?.data?.token);
-        localStorage.setItem("userEmail", response?.data?.email);
+        localStorage.setItem("userId", response?.data?.id);
         window.location.href = "/";
       })
       .catch((err) => {

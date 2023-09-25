@@ -5,7 +5,7 @@ import { Input } from "antd";
 import socket from "../../socket";
 
 const Rooms = () => {
-  const userEmail = localStorage.getItem("userEmail");
+  const userId = localStorage.getItem("userId");
   const chatToken = localStorage.getItem("chatToken");
 
   const [rooms, setRooms] = useState([]);
@@ -62,7 +62,7 @@ const Rooms = () => {
       {
         recipientId: currentRoom,
         message,
-        senderId: userEmail,
+        senderId: userId,
         room: currentRoom,
         messageId: `${socket.id}${Math.random()}`,
       },
@@ -133,7 +133,7 @@ const Rooms = () => {
               <div
                 key={message?.messageId}
                 className={`${
-                  message.senderId === userEmail
+                  message.senderId === userId
                     ? "ml-auto flex-row-reverse"
                     : "mr-auto flex-row"
                 } flex`}
@@ -141,14 +141,14 @@ const Rooms = () => {
                 <div className="flex flex-col">
                   <small
                     className={`${
-                      message.senderId === userEmail ? "ml-auto" : "mr-auto"
+                      message.senderId === userId ? "ml-auto" : "mr-auto"
                     } text-xs p-1`}
                   >
-                    {message.senderId === userEmail ? <br /> : message.senderId}
+                    {message.senderId === userId ? <br /> : message.senderId}
                   </small>
                   <div
                     className={`${
-                      message.senderId === userEmail
+                      message.senderId === userId
                         ? " flex-row-reverse"
                         : "flex-row"
                     } flex items-start justify-start gap-1`}
@@ -156,7 +156,7 @@ const Rooms = () => {
                     <img src="/user.png" alt="" className="h-6" />
                     <div
                       className={`${
-                        message.senderId === userEmail
+                        message.senderId === userId
                           ? " bg-slate-300"
                           : " bg-neutral-300"
                       } p-1 rounded-md`}

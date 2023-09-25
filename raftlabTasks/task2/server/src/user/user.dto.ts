@@ -1,4 +1,3 @@
-import { Exclude, instanceToPlain } from 'class-transformer';
 import { IsEmail, IsNotEmpty, IsStrongPassword } from 'class-validator';
 
 export class RegisterUserDto {
@@ -28,16 +27,6 @@ export class LoginUserDto {
 export class UserDto {
   email: string;
   name: string;
-  _id: string;
-
-  @Exclude({ toPlainOnly: true })
   password: string;
-
-  toJSON() {
-    return instanceToPlain(this);
-  }
-
-  constructor(partial: Partial<UserDto>) {
-    Object.assign(this, partial);
-  }
+  id: string;
 }

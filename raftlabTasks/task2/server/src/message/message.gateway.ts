@@ -7,6 +7,7 @@ import {
 import { Server, Socket } from 'socket.io';
 import * as jwt from 'jsonwebtoken';
 import { ClientMessageDto } from './message.dto';
+import { MessageService } from './message.service';
 
 @WebSocketGateway({
   cors: {
@@ -14,6 +15,8 @@ import { ClientMessageDto } from './message.dto';
   },
 })
 export class MessageGateway {
+  constructor(private readonly messageService: MessageService) {}
+
   @WebSocketServer()
   server: Server;
 
@@ -26,9 +29,9 @@ export class MessageGateway {
     if (token) {
       try {
         const decodedToken = jwt.verify(token, this.SECRET_KEY) as {
-          email: string;
+          userId: string;
         };
-        this.connectedUsers[decodedToken.email] = client;
+        this.connectedUsers[decodedToken.userId] = client;
       } catch (error) {
         console.log('[TOKEN_DECODE_ERROR]', error.message);
         client.disconnect(true);
@@ -37,32 +40,38 @@ export class MessageGateway {
   }
 
   handleDisconnect(client: Socket) {
-    const userEmail = Object.keys(this.connectedUsers).find(
+    const userId = Object.keys(this.connectedUsers).find(
       (key) => this.connectedUsers[key] === client,
     );
 
-    if (userEmail) {
-      delete this.connectedUsers[userEmail];
+    if (userId) {
+      delete this.connectedUsers[userId];
     }
   }
 
   @SubscribeMessage('joinClient')
-  handlePrivateClientMessage(
+  async handlePrivateClientMessage(
     @MessageBody()
     data: {
-      userEmail: string;
+      senderId: string;
+      recipientId: string;
     },
   ) {
-    return { message: `${data.userEmail} Joined` };
+    const messages = await this.messageService.findClientMessages(
+      data.senderId,
+      data.recipientId,
+    );
+    return messages;
   }
 
   @SubscribeMessage('clients')
-  handlePrivateMessage(
+  async handlePrivateMessage(
     @MessageBody()
     data: ClientMessageDto,
   ) {
     const { recipientId } = data;
     const recipientSocket = this.connectedUsers[recipientId];
+    await this.messageService.create(data);
     if (recipientSocket) {
       recipientSocket.emit('clients', {
         data,

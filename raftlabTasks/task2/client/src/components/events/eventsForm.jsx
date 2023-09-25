@@ -17,7 +17,7 @@ const EventsForm = () => {
   const [formData, setFormData] = useState({
     title,
     description,
-    completed,
+    completed: completed === "true" ? true : false,
   });
 
   const handleEvent = async () => {
@@ -44,7 +44,7 @@ const EventsForm = () => {
       .catch((err) => {
         setErrMsg(
           err?.response?.data?.message?.[0] ||
-            err?.response?.data?.error?.errors[0].message ||
+            err?.response?.data?.error?.errors?.[0]?.message ||
             err?.response?.data?.error ||
             err?.message
         );

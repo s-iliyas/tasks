@@ -118,7 +118,7 @@ export class EventsController {
           headers: { Authorization: token, 'Content-Type': 'application/json' },
         },
       );
-      return response.data.data.updateEvent;
+      return response?.data?.data?.updateEvent;
     } catch (error) {
       throw new HttpException(
         { error: error?.response?.data || error.message },

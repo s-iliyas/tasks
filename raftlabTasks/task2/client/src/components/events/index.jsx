@@ -47,6 +47,7 @@ const Events = () => {
       >
         Create Event
       </Link>
+      <br />
       {loading && <small>Loading..</small>}
       {events.length === 0 && "No events."}
       {events.map((event, index) => (

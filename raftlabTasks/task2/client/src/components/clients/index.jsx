@@ -5,25 +5,25 @@ import { Input } from "antd";
 import socket from "../../socket";
 
 const Clients = () => {
-  const userEmail = localStorage.getItem("userEmail");
+  const userId = localStorage.getItem("userId");
 
   const [clients, setClients] = useState([]);
   const [messages, setMessages] = useState([]);
   const [online, setOnline] = useState([]);
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(true);
-  const [currentClient, setCurrentClient] = useState(userEmail);
+  const [currentClient, setCurrentClient] = useState(userId);
   const messagesEndRef = useRef(null);
 
   const getClients = async () => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_BASE_URL}/user`)
       .then((response) => {
-        const filteredEmails = response?.data?.users?.filter(
-          (user) => user !== userEmail
+        const filteredIds = response?.data?.users?.filter(
+          (user) => user !== userId
         );
-        setClients(filteredEmails);
-        setCurrentClient(filteredEmails[0]);
+        setClients(filteredIds);
+        setCurrentClient(filteredIds[0]);
       })
       .finally(() => {
         setLoading(false);
@@ -35,16 +35,23 @@ const Clients = () => {
   };
 
   useEffect(() => {
+    socket.emit(
+      "joinClient",
+      { recipientId: currentClient, senderId: userId },
+      (data) => {
+        setMessages(data);
+      }
+    );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentClient]);
+
+  useEffect(() => {
     getClients();
 
     function onListenClientMessage(data) {
       setMessages((prevMessages) => [...prevMessages, data?.data]);
       setOnline(data?.online);
     }
-
-    socket.emit("joinClient", { userEmail }, (data) => {
-      console.log(data?.message);
-    });
 
     socket.on("clients", onListenClientMessage);
 
@@ -60,8 +67,7 @@ const Clients = () => {
       {
         recipientId: currentClient,
         message,
-        senderId: userEmail,
-        id: `${socket.id}${Math.random()}`,
+        senderId: userId,
       },
       (data) => {
         setMessages((prevMessages) => [...prevMessages, data.data]);
@@ -136,15 +142,15 @@ const Clients = () => {
               ?.filter(
                 (message) =>
                   (message.recipientId === currentClient &&
-                    message.senderId === userEmail) ||
-                  (message.recipientId === userEmail &&
+                    message.senderId === userId) ||
+                  (message.recipientId === userId &&
                     message.senderId === currentClient)
               )
               ?.map((message, index) => (
                 <div
                   key={index}
                   className={`${
-                    message.senderId === userEmail
+                    message.senderId === userId
                       ? "ml-auto flex-row-reverse"
                       : "mr-auto flex-row"
                   } flex p-1 gap-x-1 items-start justify-start`}
@@ -152,7 +158,7 @@ const Clients = () => {
                   <img src="/user.png" alt="" className="h-6" />
                   <div
                     className={`${
-                      message.senderId === userEmail
+                      message.senderId === userId
                         ? " bg-slate-300"
                         : " bg-neutral-300"
                     } p-1 rounded-md`}

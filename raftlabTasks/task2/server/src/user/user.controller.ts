@@ -30,10 +30,10 @@ export class UserController {
         throw new Error('User already exists. Please Login.');
       }
       const user = await this.userService.register(data);
-      const token = jwt.sign({ email: user.email }, this.SECRET_KEY, {
+      const token = jwt.sign({ userId: user.id }, this.SECRET_KEY, {
         expiresIn: '1d',
       });
-      return { message: 'Registration Success.', token, email: user.email };
+      return { message: 'Registration Success.', token, id: user.id };
     } catch (error) {
       console.log('[REGISTER_USER_ERROR]', error.message);
       throw new HttpException({ error: error.message }, HttpStatus.BAD_REQUEST);
@@ -54,10 +54,10 @@ export class UserController {
       if (!comparePassword) {
         throw new Error('Incorrect Password.');
       }
-      const token = jwt.sign({ email: user[0].email }, this.SECRET_KEY, {
+      const token = jwt.sign({ userId: user[0].id }, this.SECRET_KEY, {
         expiresIn: '1d',
       });
-      return { message: 'Login success.', token, email: user[0].email };
+      return { message: 'Login success.', token, id: user[0].id };
     } catch (error) {
       console.log('[REGISTER_USER_ERROR]', error.message);
       throw new HttpException({ error: error.message }, HttpStatus.BAD_REQUEST);
@@ -68,7 +68,7 @@ export class UserController {
   async users() {
     try {
       const users = await this.userService.findUser();
-      return { users: users.map((user) => user.email) };
+      return { users: users.map((user) => user.id) };
     } catch (error) {
       console.log('[GET_USERS_ERROR]', error.message);
       throw new HttpException({ error: error.message }, HttpStatus.BAD_REQUEST);

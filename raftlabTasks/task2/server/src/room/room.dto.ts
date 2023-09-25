@@ -4,7 +4,6 @@ import {
   IsNotEmpty,
   MinLength,
   MaxLength,
-  IsEmail,
 } from 'class-validator';
 
 export class CreateRoomDto {
@@ -31,6 +30,5 @@ export class RoomMessageDto {
   messageId: string;
 
   @IsString()
-  @IsEmail()
   senderId: string;
 }

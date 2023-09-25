@@ -3,7 +3,7 @@ import socket from "../../socket";
 
 const Home = () => {
   const token = localStorage.getItem("chatToken");
-  const userEmail = localStorage.getItem("userEmail");
+  const userId = localStorage.getItem("userId");
 
   const navigate = useNavigate();
 
@@ -11,7 +11,7 @@ const Home = () => {
     <section className="min-h-screen flex flex-col justify-center items-center">
       {token ? (
         <div className="flex flex-col space-y-5 items-center justify-center">
-          <strong>Holaa, {userEmail}</strong>
+          <strong>Holaa, {userId}</strong>
           <div className="flex flex-wrap items-center gap-3 justify-center">
             <Link
               onClick={() => {
