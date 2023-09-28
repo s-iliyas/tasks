@@ -11,22 +11,28 @@ import { setUserDetails } from "@/store/slices/user.slice";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 
 const Form = () => {
+  // Retrieve dispatch function from custom hook
   const dispatch = useAppDispatch();
 
+  // Get user details from Redux store using custom hook and selector
   const userDetails = useAppSelector(
     (state: RootState) => state.user.userDetails
   );
 
+  // Access the router for navigation
   const { push } = useRouter();
 
+  // Get the username from local storage
   const username =
     typeof localStorage !== "undefined" &&
     localStorage.getItem("hanabiUsername");
 
+  // Redirect to the homepage if the user's username doesn't match
   if (userDetails?.username !== username) {
     push("/");
   }
 
+  // Initialize form data state
   const [formData, setFormData] = useState({
     email: userDetails.email || "",
     name: userDetails.name || "",
@@ -35,12 +41,14 @@ const Form = () => {
     dob: userDetails.dob || "",
   });
 
+  // Initialize state for messages and loading
   const [msg, setMsg] = useState<{
     message: string;
     error: boolean;
   } | null>(null);
   const [loading, setLoading] = useState(false);
 
+  // Function to handle form submission
   const handleRegister = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     setLoading(true);
@@ -59,7 +67,9 @@ const Form = () => {
         { headers: { "Content-Type": "application/json" } }
       )
       .then((response) => {
+        // Dispatch an action to update user details in Redux store
         dispatch(setUserDetails(response?.data));
+        // Redirect to the confirmation page
         push("/confirmation");
       })
       .catch((err) => {

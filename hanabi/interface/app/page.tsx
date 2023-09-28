@@ -13,19 +13,23 @@ export default function Home() {
 
   const { push } = useRouter();
 
+  // State to manage the username input field
   const [username, setUsername] = useState(
     (typeof localStorage !== "undefined" &&
       localStorage.getItem("hanabiUsername")) ||
       ""
   );
 
+  // State to manage loading state during the API request
   const [loading, setLoading] = useState(false);
-  
+
+  // State to manage and display error/success messages
   const [msg, setMsg] = useState<{
     message: string;
     error: boolean;
   } | null>(null);
 
+  // Function to handle form submission
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     if (username) {
@@ -33,8 +37,11 @@ export default function Home() {
       axios
         .get(`http://localhost:8000/user/${username}`)
         .then((response) => {
+          // Dispatch an action to update user details in Redux store
           dispatch(setUserDetails(response?.data));
+          // Store the username in local storage
           localStorage.setItem("hanabiUsername", response?.data?.username);
+          // Redirect to the form page
           push("/form");
         })
         .catch((err) =>
@@ -84,6 +91,7 @@ export default function Home() {
           {loading ? "Wait.." : "Submit"}
         </button>
       </form>
+      {/* Display error or success message */}
       {msg && (
         <small className={msg.error ? "text-red-600" : "text-green-600"}>
           {msg.message}
