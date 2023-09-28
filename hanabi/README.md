@@ -182,15 +182,15 @@ DATABASE_URL="mongodb+srv://username:password@********.********.mongodb.net/coll
 1. Start the backend server `http://localhost:8000`:
 
    ```bash
-   cd backend
-   npm run start
+   cd services
+   yarn run start:dev
    ```
 
 2. Start the frontend server:
 
    ```bash
-   cd frontend
-   npm run dev
+   cd interface
+   yarn dev --port 3000
    ```
 
 3. Access the application ui in your browser at `http://localhost:3000`.
