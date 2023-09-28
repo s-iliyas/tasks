@@ -171,6 +171,13 @@ yarn run test:e2e
 ```
 
 ## Usage
+- Before running backend server add .env file in services folder and add mongodb url in it.
+```
+## .env format
+
+DATABASE_URL="mongodb+srv://username:password@********.********.mongodb.net/collectionName?retryWrites=true&w=majority"
+
+```
 
 1. Start the backend server `http://localhost:8000`:
 

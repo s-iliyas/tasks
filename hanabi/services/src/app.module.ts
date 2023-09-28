@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
+
 import { UserModule } from './user/user.module';
+import { AppController } from './app.controller';
 import { PrismaModule } from './prisma/prisma.module';
 
 // root module which will bundle other modules which act as parent graph

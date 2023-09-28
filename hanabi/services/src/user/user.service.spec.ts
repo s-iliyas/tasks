@@ -1,6 +1,7 @@
-import { Test, TestingModule } from '@nestjs/testing';
 import { PrismaClient } from '@prisma/client';
+import { Test, TestingModule } from '@nestjs/testing';
 import { mockDeep, DeepMockProxy } from 'jest-mock-extended';
+
 import { UserService } from './user.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { createResponseDtoData, updateDtoData } from './testData/user.testData';

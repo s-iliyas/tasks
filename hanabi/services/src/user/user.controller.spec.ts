@@ -1,10 +1,11 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { HttpException } from '@nestjs/common';
-import { UserController } from './user.controller';
-import { UserService } from './user.service';
+
 import { UserDto } from './dto/user.dto';
-import { createDtoData, createResponseDtoData } from './testData/user.testData';
+import { UserService } from './user.service';
+import { UserController } from './user.controller';
 import { PrismaService } from '../prisma/prisma.service';
+import { createDtoData, createResponseDtoData } from './testData/user.testData';
 
 // Create a mock UserService for testing
 const userServiceMock = {

@@ -1,3 +1,4 @@
+import * as moment from 'moment';
 import {
   Controller,
   Get,
@@ -8,10 +9,10 @@ import {
   HttpStatus,
   HttpCode,
 } from '@nestjs/common';
-import { UserService } from './user.service';
-import { UserDto } from './dto/user.dto';
+
 import { User } from '@prisma/client';
-import * as moment from 'moment';
+import { UserDto } from './dto/user.dto';
+import { UserService } from './user.service';
 
 @Controller('user')
 export class UserController {
