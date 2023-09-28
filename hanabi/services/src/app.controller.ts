@@ -1,12 +1,10 @@
 import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
-
+  // health check function to check whether server is running or not
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  healthCheck(): string {
+    return 'Server running...';
   }
 }
