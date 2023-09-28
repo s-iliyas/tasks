@@ -1,6 +1,7 @@
-import "./globals.css";
 import type { Metadata } from "next";
 import { Alegreya } from "next/font/google";
+
+import "./globals.css";
 import MainProvider from "./main";
 
 const inter = Alegreya({ subsets: ["greek"] });

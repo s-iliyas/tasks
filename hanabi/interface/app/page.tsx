@@ -1,15 +1,18 @@
 "use client";
 
+import axios from "axios";
+import { Input } from "antd";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+
 import { useAppDispatch } from "@/hooks/store";
 import { setUserDetails } from "@/store/slices/user.slice";
-import { Input } from "antd";
-import axios from "axios";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 
 export default function Home() {
   const dispatch = useAppDispatch();
+
   const { push } = useRouter();
+
   const [username, setUsername] = useState(
     (typeof localStorage !== "undefined" &&
       localStorage.getItem("hanabiUsername")) ||
@@ -17,6 +20,7 @@ export default function Home() {
   );
 
   const [loading, setLoading] = useState(false);
+  
   const [msg, setMsg] = useState<{
     message: string;
     error: boolean;

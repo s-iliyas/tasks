@@ -1,5 +1,4 @@
 import Link from "next/link";
-import React from "react";
 import { FiCheck } from "react-icons/fi";
 
 const Confirmation = () => {

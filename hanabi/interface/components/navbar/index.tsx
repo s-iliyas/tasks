@@ -1,8 +1,8 @@
 "use client";
-import React from "react";
-import ThemeButton from "../ui/ThemeButton";
-import Link from "next/link";
+
 import { usePathname } from "next/navigation";
+
+import ThemeButton from "../ui/ThemeButton";
 
 const Navbar = () => {
   const pathname = usePathname();

@@ -1,8 +1,9 @@
 "use client";
 
-import { ThemeContext } from "@/contexts/ThemeProvider";
 import React, { useContext } from "react";
 import { FiMoon, FiSun } from "react-icons/fi";
+
+import { ThemeContext } from "@/contexts/ThemeProvider";
 
 const ThemeButton = () => {
   const theme = useContext(ThemeContext);

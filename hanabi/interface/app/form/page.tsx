@@ -1,13 +1,14 @@
 "use client";
 
-import { useAppDispatch, useAppSelector } from "@/hooks/store";
-import { RootState } from "@/store";
-import { setUserDetails } from "@/store/slices/user.slice";
-import { Input } from "antd";
 import axios from "axios";
 import Link from "next/link";
+import { Input } from "antd";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+
+import { RootState } from "@/store";
+import { setUserDetails } from "@/store/slices/user.slice";
+import { useAppDispatch, useAppSelector } from "@/hooks/store";
 
 const Form = () => {
   const dispatch = useAppDispatch();
