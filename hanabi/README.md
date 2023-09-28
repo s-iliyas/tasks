@@ -163,7 +163,7 @@ The backend connects to a MongoDB database using Prisma for data storage.
 yarn run test:watch
 ```
 
-### Test Suites
+### E2E Test
 
 - Backend NestJs server application has a e2e test. To test all cases run below command to watch in services directory.
 ```
