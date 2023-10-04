@@ -47,6 +47,7 @@ const extraConfig = async (app: Express) =>
           ttl: 300,
         }),
       });
+
       await server.start();
 
       app.use(
@@ -64,8 +65,8 @@ const extraConfig = async (app: Express) =>
   });
 
 dbConnector()
-  .then(() => {
-    extraConfig(app);
+  .then(async () => {
+    await extraConfig(app);
   })
   .then(() => {
     app
