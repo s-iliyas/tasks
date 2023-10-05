@@ -38,7 +38,7 @@ export const addTMDBGenre = async (req, res) => {
 
 export const addTMDBTopRatedMovies = async (req, res) => {
   const TMDB_URI = process.env.TMDB_URI;
-  const TMDB_TOKEN = process.env.TMDB_TOKEN;
+  const TMDB_TOKEN = process.env.TMDB_TOKEN ;
   const { page } = req.params;
 
   if (page) {
