@@ -1,19 +1,32 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
+import { PostContext } from "../../contexts/PostProvider";
 
 const Form = () => {
-  const [formData, setFormData] = useState({ title: "", content: "" });
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+  const initialData = { title: "", content: "" };
+
+  const [formData, setFormData] = useState(initialData);
+
+  const postContext = useContext(PostContext);
+
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
+    e.preventDefault();
     try {
-      const posts = await axios.post("http://localhost:8000/posts", formData, {
-        headers: { "Content-Type": "application/json" },
-      });
-      console.log(posts);
+      const response = await axios.post(
+        "http://localhost:8000/posts",
+        formData,
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      const newPost = response.data;
+      postContext?.setPosts((prevPosts) => [...prevPosts, newPost]);
+      setFormData(initialData);
     } catch (error) {
       console.log(error);
     }
   };
+
   return (
     <form>
       <input

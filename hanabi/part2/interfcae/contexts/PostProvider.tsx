@@ -1,17 +1,37 @@
-import React, { useState } from "react";
-import { createContext } from "react";
+import React, {
+  useState,
+  ReactNode,
+  Dispatch,
+  SetStateAction,
+  createContext,
+} from "react";
 
-const PostContext = createContext<{
-  posts: never[];
-  setPosts: React.Dispatch<React.SetStateAction<never[]>>;
-} | null>(null);
+interface PostInterface {
+  title: string;
+  content: string;
+  id: string;
+  date: string;
+}
 
-const PostProvider = ({ children }: { children: React.ReactNode }) => {
-  const [posts, setPosts] = useState([]);
+interface PostContextProps {
+  posts: PostInterface[];
+  setPosts: Dispatch<SetStateAction<PostInterface[]>>;
+}
+
+export const PostContext = createContext<PostContextProps | undefined>(
+  undefined
+);
+
+const PostProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const [posts, setPosts] = useState<PostInterface[]>([]);
+
+  const contextValue: PostContextProps = {
+    posts,
+    setPosts,
+  };
+
   return (
-    <PostContext.Provider value={{ posts, setPosts }}>
-      {children}
-    </PostContext.Provider>
+    <PostContext.Provider value={contextValue}>{children}</PostContext.Provider>
   );
 };
 
