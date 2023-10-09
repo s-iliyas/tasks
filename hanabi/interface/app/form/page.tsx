@@ -10,6 +10,23 @@ import { RootState } from "@/store";
 import { setUserDetails } from "@/store/slices/user.slice";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 
+const validateDate = (dob: string) => {
+  const [day, month, year] = dob.split("-");
+  if (parseInt(day) > 31) {
+    return "Invalid day format";
+  } else if (parseInt(month) > 12) {
+    return "Invalid month format";
+  } else if (year.length !== 4) {
+    return "Invalid year format";
+  }
+  const currentDate = new Date();
+  const dobDateobj = new Date(`${year}-${month}-${day}`);
+  if (dobDateobj > currentDate) {
+    return "Dob can not be in future";
+  }
+  return null;
+};
+
 const Form = () => {
   // Retrieve dispatch function from custom hook
   const dispatch = useAppDispatch();
@@ -50,39 +67,44 @@ const Form = () => {
 
   // Function to handle form submission
   const handleRegister = async (e: { preventDefault: () => void }) => {
+    const validateDateValue: string | null = validateDate(formData.dob);
     e.preventDefault();
-    setLoading(true);
-    axios
-      .post(
-        `http://localhost:8000/user/${
-          Object.keys(userDetails).length > 1 ? "update" : "create"
-        }`,
-        {
-          email: formData.email?.trim(),
-          name: formData.name?.trim(),
-          phoneNumber: formData.phoneNumber?.trim(),
-          username: formData.username?.trim(),
-          dob: formData.dob?.trim(),
-        },
-        { headers: { "Content-Type": "application/json" } }
-      )
-      .then((response) => {
-        // Dispatch an action to update user details in Redux store
-        dispatch(setUserDetails(response?.data));
-        // Redirect to the confirmation page
-        push("/confirmation");
-      })
-      .catch((err) => {
-        setMsg({
-          message:
-            (err?.response?.data?.statusCode !== 404 &&
-              err?.response?.data?.message?.[0]) ||
-            err?.response?.data?.error ||
-            err?.message,
-          error: true,
-        });
-      })
-      .finally(() => setLoading(false));
+    if (validateDateValue) {
+      console.log(validateDateValue);
+    } else {
+      setLoading(true);
+      axios
+        .post(
+          `http://localhost:8000/user/${
+            Object.keys(userDetails).length > 1 ? "update" : "create"
+          }`,
+          {
+            email: formData.email?.trim(),
+            name: formData.name?.trim(),
+            phoneNumber: formData.phoneNumber?.trim(),
+            username: formData.username?.trim(),
+            dob: formData.dob?.trim(),
+          },
+          { headers: { "Content-Type": "application/json" } }
+        )
+        .then((response) => {
+          // Dispatch an action to update user details in Redux store
+          dispatch(setUserDetails(response?.data));
+          // Redirect to the confirmation page
+          push("/confirmation");
+        })
+        .catch((err) => {
+          setMsg({
+            message:
+              (err?.response?.data?.statusCode !== 404 &&
+                err?.response?.data?.message?.[0]) ||
+              err?.response?.data?.error ||
+              err?.message,
+            error: true,
+          });
+        })
+        .finally(() => setLoading(false));
+    }
   };
 
   return (
