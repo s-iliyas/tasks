@@ -1,0 +1,18 @@
+services:
+  postgres:
+    image: postgres:15.0
+    restart: always
+    ports:
+      - "5003:5432"
+    volumes:
+      - ../../../../../db_data:/var/lib/postgresql/data
+    env_file: .env.development
+
+  adminer:
+    image: adminer:standalone
+    restart: always
+    ports:
+      - 8085:8080
+
+volumes:
+  db_data:
